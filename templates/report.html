@@ -1,34 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Attendance Report</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
-        table, th, td {
-            border: 1px solid black;
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         th, td {
             padding: 15px;
             text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        img {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin: 20px;
+            font-size: 16px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Attendance Report</h1>
+    <h1>Attendance Records</h1>
+    <a href="{{ url_for('unknown_faces') }}">Manage Unknown Faces</a>
     <table>
         <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Image</th>
         </tr>
-        {% for row in data %}
+        {% for record in records %}
         <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
+            <td>{{ record[0] }}</td>
+            <td>{{ record[1] }}</td>
+            <td>{{ record[2] }}</td>
+            <td>{{ record[3] }}</td>
+            <td>
+                <img src="{{ url_for('static', filename=record[4]) }}" alt="Face">
+            </td>
         </tr>
         {% endfor %}
     </table>

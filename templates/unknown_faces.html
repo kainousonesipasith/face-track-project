@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unknown Faces</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin: 20px;
+            font-size: 16px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .face-container {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            vertical-align: top;
+        }
+        .face-container img {
+            width: 150px;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .face-container input {
+            margin-top: 5px;
+            padding: 5px;
+            width: 140px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .face-container button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .face-container button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Unknown Faces</h1>
+    <a href="{{ url_for('index') }}">Back to Attendance Records</a>
+    <div class="container">
+        {% for image in images %}
+        <div class="face-container">
+            <img src="{{ url_for('static', filename=image) }}" alt="Unknown Face">
+            <form action="{{ url_for('add_known_face') }}" method="POST">
+                <input type="text" name="name" placeholder="Enter Name" required>
+                <input type="hidden" name="image_path" value="{{ image }}">
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
